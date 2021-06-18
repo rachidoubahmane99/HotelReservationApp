@@ -8,22 +8,18 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Dao.CrudChambreDaoImp;
-import jakarta.servlet.annotation.WebServlet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import jakarta.servlet.http.HttpSession;
-import model.ChambreBean;
+
 /**
  *
  * @author rachid dev
  */
-
-@WebServlet("/home")
-public class ChambreController extends HttpServlet {
+@WebServlet(name = "LogoutController", urlPatterns = {"/Logout"})
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +30,19 @@ public class ChambreController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    private static final long serialVersionUID = 1L;
-	CrudChambreDaoImp db = new CrudChambreDaoImp();
-    int t=0;
-
-    public ChambreController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-
+           PrintWriter out=response.getWriter();  
+              
+            request.getRequestDispatcher("home.jsp").include(request, response);  
+              
+            HttpSession session=request.getSession();  
+            session.invalidate();
+            response.sendRedirect("Login.jsp");
+              
+            out.print("You are successfully logged out!");  
+              
+            out.close(); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,29 +55,12 @@ public class ChambreController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
-        HttpSession session =request.getSession();
-            ArrayList<ChambreBean> chambres;
-            
-            if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            }
-             if(session.getAttribute("loggedIn") !="Client") {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            }
-            else {
-            try {
-		chambres = (ArrayList<ChambreBean>) db.getChambers();
-				
-	        session.setAttribute("chambres", chambres);
-	    } catch (SQLException e) {
-			
-		e.printStackTrace();
-            }
-		
-		request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
-            }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    
+  
+    
     }
 
     /**
@@ -98,7 +74,7 @@ public class ChambreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

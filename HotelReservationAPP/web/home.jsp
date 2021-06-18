@@ -5,44 +5,28 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Home</title>
-</head>
-<body>
-<%@ include file="Includes/header.jsp" %>
-<div style="border-style: solid; text-align: center;justify-content: center">
+
+<%@ include file="Includes/Client/headerClient.jsp" %>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Client/home.css" />
 
 
-
-<h2>Chambres List </h2>
-
-<table style=";display: flex;
-  justify-content: center;"
-  >
-  <tr>
-    <th>Id Chambre</th>
-    <th>Label</th>
-    <th>Numero</th>
-    <th>Price</th>
-    <th>Etat</th>
-    <th></th>
-  </tr>
   <%for (ChambreBean chambre : (List<ChambreBean>)session.getAttribute("chambres")) { %>
-  <tr>
-    <td><%=chambre.getIdChambre()%></td>
-    <td><%=chambre.getLabel()%></td>
-    <td><%=chambre.getNumChanbre()%></td>
-    <td><%=chambre.getPrice()%></td>
-    <td><%=chambre.getEtat()%></td>
-    <td><form method="Post" action="Controller">
-    	<input type="hidden" name="id" value="<%=chambre.getIdChambre()%>">
-    	<input type="submit" name="btnPost" value="supprimer"></form></td>
-  </tr><%} %>
- 
- 
-</table></div>
+  
+    <div class="wrapper">
+  <h1><%=chambre.getIdChambre()%></h1>
+  <div class="image i2"></div>
+  <div class="details"><h1><em><%=chambre.getLabel()%></em></h1>
+  <h2><%=chambre.getNumChanbre()%></h2>
+  <p>4 Days - 3 Nights</p></div>
+  <h1><%=chambre.getPrice()%> DH</h1>
+</div>
+  
+    
+ <%} %>
+
 </body>
+<%@ include file="Includes/footer.jsp" %>
+
+
 </html>

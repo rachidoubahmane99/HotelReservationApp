@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import model.ClientBean;
 
@@ -19,4 +20,6 @@ public interface ClientDao {
     public ClientBean getClient (int id); //return un client
     public ClientBean update (ClientBean c); //modifier un client
     public void delete (int id); 
+    public ClientBean VerifierClient (ClientBean c); 
+    public Boolean Register(ClientBean c) throws SQLException;
 }

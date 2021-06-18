@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.time.LocalDate" %>
@@ -7,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/web/../Layout/Header.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/web/Layout/Header.css" />
+  
 </head>
 <body>
 <div class="nav">
@@ -26,7 +26,12 @@
   </div>
   
   <div class="nav-links">
-    <a href="<%=request.getContextPath()%>/home" target="_blank">Home</a>
-    <a href="Login.jsp" target="_blank">Login</a>
+    <a href="#" target="_blank">Home</a>
+    <a href="" target="_blank">Gestion Reservation</a>
+    <a href="#" target="_blank">Gestion Chambres</a>
+    <a href="#" target="_blank">Mon Profile</a>
+    <a href="<%=requesst.getContextPath()%>/Logout" target="_blank">Logout</a>
   </div>
 </div>
+</body>
+</html>

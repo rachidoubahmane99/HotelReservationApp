@@ -28,8 +28,22 @@ public class ClientDaoImp implements ClientDao{
     static ResultSet rs = null;
     @Override
     public ClientBean ajouter(ClientBean c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return null;
+        
     }
+    @Override
+    public Boolean Register(ClientBean c) throws SQLException {
+    String query = "INSERT INTO Client (Email,FullName,password) VALUES (?,?,?)";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(query);
+        ps.setString(1, c.getEmail());
+        ps.setString(2, c.getFullName());
+        ps.setString(3, c.getPassword());
+      int nbUpdated = ps.executeUpdate();
+
+        con.close();
+        return nbUpdated!=0;
+     }
 
     @Override
     public ClientBean search(String cin) {
@@ -81,5 +95,38 @@ public class ClientDaoImp implements ClientDao{
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ClientBean VerifierClient(ClientBean c) {
+   
+      ClientBean cl = null; 
+        try {
+            String query1 = "SELECT * FROM Client Where email = ? and password = ?";
+            con =Factory.dbConnect();
+            
+            ps = con.prepareStatement(query1);
+             ps.setString(1, c.getEmail());
+             ps.setString(2, c.getPassword());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cl = new ClientBean();
+                cl.setIdClient(rs.getInt("idClient"));
+                cl.setLogin(rs.getString("login"));
+                cl.setPassword(rs.getString("password"));
+                cl.setFullName(rs.getString("FullName"));
+                cl.setEmail(rs.getString("Email"));
+                cl.setAdresse(rs.getString("Adresse"));
+                            }
+         } catch (SQLException ex) {
+            System.out.println("Error pendent chercher le client");
+        }
+
+        return cl;
+    }   
+    
+    
+    
+    
+    
     
 }
