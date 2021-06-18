@@ -7,14 +7,14 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import Dao.CrudChambreDaoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import model.ChambreBean;
 /**
  *
@@ -23,7 +23,6 @@ import model.ChambreBean;
 
 
 public class ChambreController extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
