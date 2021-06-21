@@ -94,7 +94,7 @@ select{
 </div>
 
 
-<form action="<%=request.getContextPath()%>/newChambre" method="post" >
+<form  action="<%=request.getContextPath()%>/newChambre" method="post" enctype="multipart/form-data" >
 <ul class="form-style-1">
     <li>
         <label>Label<span class="required">*</span></label>

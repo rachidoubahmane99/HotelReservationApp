@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.io.InputStream;
+
 /**
  *
  * @author rachid dev
@@ -17,7 +19,7 @@ String label ;
 int NumChanbre;	
 Boolean etat; 	
 Double price; 	
-String image;
+    String image;
 
     public ChambreBean() {
     }

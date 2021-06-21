@@ -1,23 +1,30 @@
 package controller;
 
 import Dao.CrudChambreDaoImp;
+import Dao.Factory;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import model.ChambreBean;
 
 /**
  *
  * @author moham
  */
+@MultipartConfig
 @WebServlet("/newChambre")
 public class addChambreController extends HttpServlet {
 
@@ -63,8 +70,43 @@ public class addChambreController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         
-        
-        
+        try {
+                
+            String label = request.getParameter("label");
+            System.out.println(label);
+            int numero = Integer.parseInt(request.getParameter("numero"));
+            System.out.println(numero); 
+            double prix = Integer.parseInt(request.getParameter("prix"));
+                        
+            Part part = request.getPart("image");
+            
+
+            
+            Connection con = Factory.dbConnect();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Chambre (label,NumChanbre,price,image ) VALUES (?,?,?,?)");
+            int result = 0;
+            ps.setString(1, label);
+            ps.setInt(2, numero);
+            ps.setDouble(3, prix);
+            //ps.setString(4, "");
+            InputStream is = part.getInputStream();
+            ps.setBlob(4, is);
+            
+            result = ps.executeUpdate();
+                if (result > 0) {
+                    System.out.println("gooood");
+                } else {
+                    System.out.println("nooot goood");
+                }
+            
+
+            /*ChambreBean chambreBean = new ChambreBean(label,numero,prix,image);
+            crudChambreDaoImp.ajouter(chambreBean);
+            System.out.println("bien ajouter");
+            session.setAttribute("newChambre", "Chambre bien ajouter");*/
+        } catch (SQLException ex) {
+            Logger.getLogger(addChambreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }
@@ -77,23 +119,16 @@ public class addChambreController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session =request.getSession();
-        try {
-            String label = request.getParameter("label");
-            int numero = Integer.parseInt(request.getParameter("numero"));
-            double prix = Integer.parseInt(request.getParameter("prix"));
-            String image = request.getParameter("image");
-
-            ChambreBean chambreBean = new ChambreBean(label,numero,prix,image);
-            crudChambreDaoImp.ajouter(chambreBean);
-            System.out.println("bien ajouter");
-            session.setAttribute("newChambre", "Chambre bien ajouter");
-        } catch (SQLException ex) {
-            Logger.getLogger(addChambreController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            HttpSession session =request.getSession();
+            
+            
+            doGet(request, response);
+        
+       
         
             request.getServletContext().getRequestDispatcher("/addChambre.jsp").forward(request, response);
         processRequest(request, response);
