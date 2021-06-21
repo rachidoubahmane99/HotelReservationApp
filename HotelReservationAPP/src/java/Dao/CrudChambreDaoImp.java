@@ -19,6 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Dao.Factory;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ChambreBean;
 public class CrudChambreDaoImp implements CrudChambreDAO{
     static Connection con = null;
@@ -49,8 +56,34 @@ public class CrudChambreDaoImp implements CrudChambreDAO{
     rs = ps.executeQuery();
     System.out.println("requete : select * from Chambre reussit \n");
     while(rs.next()){
+        Blob blob = rs.getBlob("image");
+ 
+        InputStream inputStream = blob.getBinaryStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+ 
+        try {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CrudChambreDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        byte[] imageBytes = outputStream.toByteArray();
+ 
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+ 
+        try {
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CrudChambreDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     	System.out.println("label :"+rs.getString("label")+" | Num Chambre :"+rs.getInt("NumChanbre")+""); 
-    	chambers.add(new ChambreBean(rs.getInt("idChambre"), rs.getString("label"), rs.getInt("NumChanbre"), rs.getBoolean("etat"), rs.getDouble("price"), rs.getString("image")));}
+    	chambers.add(new ChambreBean(rs.getInt("idChambre"), rs.getString("label"), rs.getInt("NumChanbre"), rs.getBoolean("etat"), rs.getDouble("price"), base64Image));}
     
     con.close();
     return chambers;    

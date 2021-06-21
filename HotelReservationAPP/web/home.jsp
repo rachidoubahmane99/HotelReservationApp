@@ -18,7 +18,7 @@
   
     <li class="cards_item">
       <div class="card">
-        <div class="card_image"><img src=""></div>
+        <div class="card_image"><img src="data:image/jpg;base64,<%=chambre.getImage()%>"></div>
         <div class="card_content">
           <h2 class="card_title"><%=chambre.getLabel()%></h2>
           <p class="card_text">Numero Chambre : <%=chambre.getNumChanbre()%></p>
