@@ -5,26 +5,26 @@
  */
 package controller;
 
+import Dao.CrudChambreDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Dao.CrudChambreDaoImp;
-
-import jakarta.servlet.annotation.WebServlet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import jakarta.servlet.http.HttpSession;
 import model.ChambreBean;
+
 /**
  *
- * @author rachid dev
+ * @author moham
  */
-
-@WebServlet("/home")
-public class ChambreController extends HttpServlet {
+@WebServlet("/EditChambre")
+public class EditChambreController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +35,21 @@ public class ChambreController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    private static final long serialVersionUID = 1L;
-	CrudChambreDaoImp db = new CrudChambreDaoImp();
-    int t=0;
-
-    public ChambreController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EditChambreController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EditChambreController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,33 +61,19 @@ public class ChambreController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    CrudChambreDaoImp crudChambreDaoImp = new CrudChambreDaoImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
         HttpSession session =request.getSession();
-            ArrayList<ChambreBean> chambres;
-            
-            if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            }
-             if(session.getAttribute("loggedIn") !="Client") {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            }
-            else {
-            try {
-		chambres = (ArrayList<ChambreBean>) db.getChambers();
-				
-	        session.setAttribute("chambres", chambres);
-	    } catch (SQLException e) {
-			
-		e.printStackTrace();
-            }
-		
-		request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
-
-                //request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
-
-            }
+        int id=Integer.parseInt(request.getParameter("id"));
+        try {
+            ChambreBean ch = crudChambreDaoImp.getChambre(id);
+            session.setAttribute("chambre", ch);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditChambreController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.getServletContext().getRequestDispatcher("/editChambre.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -102,7 +87,7 @@ public class ChambreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

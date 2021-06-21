@@ -88,8 +88,10 @@ public class ClientAuthController extends HttpServlet {
         }
         
         else if (cl!= null) {
+            ClientBean compte = cl;      
              HttpSession session =request.getSession();
             session.setAttribute("loggedIn", "Client");
+            session.setAttribute("compte", compte);
             response.sendRedirect(request.getContextPath()+"/home");
             System.out.println("successfully login");
              

@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Dao.CrudChambreDaoImp;
-
 import jakarta.servlet.annotation.WebServlet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,8 +22,8 @@ import model.ChambreBean;
  * @author rachid dev
  */
 
-@WebServlet("/home")
-public class ChambreController extends HttpServlet {
+@WebServlet("/gestionChambre")
+public class adminChambreController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +40,7 @@ public class ChambreController extends HttpServlet {
 	CrudChambreDaoImp db = new CrudChambreDaoImp();
     int t=0;
 
-    public ChambreController() {
+    public adminChambreController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -69,10 +68,10 @@ public class ChambreController extends HttpServlet {
             ArrayList<ChambreBean> chambres;
             
             if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
             }
-             if(session.getAttribute("loggedIn") !="Client") {
-            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+             if(session.getAttribute("loggedIn") !="Admin") {
+            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
             }
             else {
             try {
@@ -84,10 +83,8 @@ public class ChambreController extends HttpServlet {
 		e.printStackTrace();
             }
 		
-		request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
-
+		request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
                 //request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
-
             }
     }
 

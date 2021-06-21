@@ -25,12 +25,12 @@
     </label>
   </div>
   
-  <div class="nav-links">
-    <a href="#" target="_blank">Home</a>
-    <a href="" target="_blank">Gestion Reservation</a>
-    <a href="#" target="_blank">Gestion Chambres</a>
-    <a href="#" target="_blank">Mon Profile</a>
-    <a href="<%=requesst.getContextPath()%>/Logout" target="_blank">Logout</a>
+  <div class="nav-links"
+    <a href="homeAdmin.jsp">Home</a>
+    <a href="#">Gestion Reservation</a>
+    <a href="<%=request.getContextPath()%>/gestionChambre">Gestion Chambres</a>
+    <a href="#" >Mon Profile</a>
+    <a href="<%=request.getContextPath()%>/Logout" target="_blank">Logout</a>
   </div>
 </div>
 </body>

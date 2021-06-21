@@ -19,5 +19,7 @@ public interface CrudChambreDAO {
 
 	public void ajouter(ChambreBean chmb)throws SQLException;
 	public List<ChambreBean> getChambers()throws SQLException;
+        public ChambreBean getChambre(int id) throws SQLException;
 	public void supprimer(int id)throws SQLException;
+        public void modifier(ChambreBean chm)throws SQLException;
 }

@@ -5,28 +5,36 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<html>
 <%@ include file="Includes/Client/headerClient.jsp" %>
-
+<head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Client/home.css" />
-
-
+</head>
+<body>
+      <div class="main">
+  <h1>Liste Des Chambres :</h1>
+  <ul class="cards">
   <%for (ChambreBean chambre : (List<ChambreBean>)session.getAttribute("chambres")) { %>
   
-    <div class="wrapper">
-  <h1><%=chambre.getIdChambre()%></h1>
-  <div class="image i2"></div>
-  <div class="details"><h1><em><%=chambre.getLabel()%></em></h1>
-  <h2><%=chambre.getNumChanbre()%></h2>
-  <p>4 Days - 3 Nights</p></div>
-  <h1><%=chambre.getPrice()%> DH</h1>
+    <li class="cards_item">
+      <div class="card">
+        <div class="card_image"><img src=""></div>
+        <div class="card_content">
+          <h2 class="card_title"><%=chambre.getLabel()%></h2>
+          <p class="card_text">Numero Chambre : <%=chambre.getNumChanbre()%></p>
+          <p class="card_text"> Prix /Nuit : <%=chambre.getPrice()%> DH</p>
+          <a href="<%=request.getContextPath()%>/Reservation?chambreId=<%=chambre.getIdChambre()%>"><button class="btn card_btn">Reserver</button></a>
+        </div>
+      </div>
+    </li>
+     <%} %>
+  </ul>
 </div>
+
   
-    
- <%} %>
 
 </body>
-<%@ include file="Includes/footer.jsp" %>
 
+<%@ include file="Includes/footer.jsp" %>
 
 </html>
