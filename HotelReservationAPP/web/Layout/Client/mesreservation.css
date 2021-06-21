@@ -1,0 +1,148 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 21, 2021, 12:25:22 AM
+    Author     : rachid dev
+*/
+
+
+
+.container{
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  transform: translate(-50%,-50%);
+
+  width: 100%;
+
+}
+.table{
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-direction: column;
+
+}
+
+h1{
+
+  background-color: #eee;
+
+  padding: 10px;
+
+  position: relative;
+
+}
+
+h1:before{
+
+  content: '';
+
+  border-width: 10px;
+
+  border-style: solid;
+
+  border-color: #eee transparent transparent transparent;
+
+  position: absolute;
+
+  bottom: -20px;
+
+  left: calc(50% - 10px);
+
+}
+
+table{
+
+  width: 90vw;
+
+  font-family: Sans-Serif;
+
+  box-shadow: 0 5px 0 rgb(15,157,88);
+
+}
+
+table thead{
+
+  background-color: #333;
+
+  color: white;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+}
+
+table thead tr td{
+
+  padding: 10px;
+
+}
+
+table thead .special{
+
+  width: 30%;
+
+}
+
+table tbody{
+
+  background-color: #eee;
+
+  color: #111;
+
+  text-align: center;
+
+}
+
+table tbody tr td{
+
+  padding: 10px 20px;
+
+}
+
+table tbody img{
+
+  width: 50px;
+
+}
+
+table tbody .control{
+
+  display: inline-block;
+
+}
+
+.view,.delete{
+
+  padding: 1px 5px;
+
+  margin-bottom: 5px;
+
+  color: white;
+
+  font-weight: bold;
+
+  background-color: rgb(219,68,55);
+
+  user-select: none;
+
+}
+
+.view{
+
+  background-color: rgb(66,133,244);
+
+}

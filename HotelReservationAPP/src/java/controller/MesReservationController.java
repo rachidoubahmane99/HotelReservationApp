@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Dao.ReservationDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,13 +14,27 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.ClientBean;
+import model.ReservationBean;
 
 /**
  *
  * @author rachid dev
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/Logout"})
-public class LogoutController extends HttpServlet {
+@WebServlet(name = "MesReservationController", urlPatterns = {"/MesReservation"})
+public class MesReservationController extends HttpServlet {
+    
+    
+    	ReservationDaoImp db = new ReservationDaoImp();
+
+    public MesReservationController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +47,7 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           PrintWriter out=response.getWriter();  
-              
-            request.getRequestDispatcher("home.jsp").include(request, response);  
-              
-            HttpSession session=request.getSession();  
-            session.invalidate();
-            response.sendRedirect("Login.jsp");
-              
-            out.print("You are successfully logged out!");  
-              
-            out.close(); 
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +64,26 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     
-  
+    HttpSession session =request.getSession();
+            ArrayList<ReservationBean> mesreservation;
+            
+            if (session.getAttribute("loggedIn") == null) {
+            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            }
+             if(session.getAttribute("loggedIn") !="Client") {
+            request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            }
+            else {
+                 ClientBean client = (ClientBean)session.getAttribute("compte");
+            try {
+                mesreservation = (ArrayList<ReservationBean>) db.lister(client);
+                session.setAttribute("mesreservation", mesreservation);
+		
+            } catch (SQLException ex) {
+                Logger.getLogger(MesReservationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                 request.getServletContext().getRequestDispatcher("/ClientViews/mesreservation.jsp").forward(request, response);
+            }
     
     }
 
