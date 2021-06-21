@@ -26,14 +26,13 @@ public class CrudChambreDaoImp implements CrudChambreDAO{
     static ResultSet rs = null;
     @Override
     public void ajouter(ChambreBean chmb) throws SQLException {
-        String query = "INSERT INTO Chambre (label,NumChanbre,etat,price,image ) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO Chambre (label,NumChanbre,price,image ) VALUES (?,?,?,?)";
 		con =Factory.dbConnect();
         ps = con.prepareStatement(query);
         ps.setString(1, chmb.getLabel());
         ps.setInt(2, chmb.getNumChanbre());
-        ps.setBoolean(3, chmb.getEtat());
-        ps.setDouble(4, chmb.getPrice());
-        ps.setString(5, chmb.getImage());
+        ps.setDouble(3, chmb.getPrice());
+        ps.setString(4, chmb.getImage());
         ps.executeUpdate();
         System.out.println("requete");
         
@@ -66,6 +65,44 @@ public class CrudChambreDaoImp implements CrudChambreDAO{
     ps.executeUpdate();
     
     con.close();
+    }
+
+    @Override
+    public void modifier(ChambreBean chm) throws SQLException {
+        String query = "update Chambre set label = ?, NumChanbre = ?, etat = ?, price = ?, image = ? WHERE idChambre=?";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(query);
+        ps.setString(1, chm.getLabel());
+        ps.setInt(2, chm.getNumChanbre());
+        ps.setBoolean(3, chm.getEtat());
+        ps.setDouble(4, chm.getPrice());
+        ps.setString(5, chm.getImage());
+        
+        ps.setInt(6, chm.getIdChambre());
+        
+        ps.executeUpdate();
+        
+        System.out.println("ediiiitedddd");
+    
+        con.close();
+        
+    }
+
+    @Override
+    public ChambreBean getChambre(int id) throws SQLException {
+        ChambreBean chambre = new ChambreBean();	
+	
+	String query1 = "select * from Chambre where idChambre = ?";
+	con =Factory.dbConnect();
+        ps = con.prepareStatement(query1);
+        ps.setInt(1, id);
+        rs = ps.executeQuery();
+        while(rs.next()){
+            chambre = new ChambreBean(rs.getInt("idChambre"), rs.getString("label"), rs.getInt("NumChanbre"), rs.getBoolean("etat"), rs.getDouble("price"), rs.getString("image"));
+        }
+
+        con.close();
+        return chambre; 
     }
     
 }

@@ -20,6 +20,10 @@ public class ClientBean {
     public ClientBean(){
         
     }
+     public ClientBean(String Email ,String password){
+        this.Email = Email;
+        this.password= password;
+    }
     
     public ClientBean(int idClient, String Cin, String login, String password, String FullName, String Email, String Adresse) {
         this.idClient = idClient;

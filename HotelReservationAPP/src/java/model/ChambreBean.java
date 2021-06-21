@@ -19,11 +19,32 @@ Boolean etat;
 Double price; 	
 String image;
 
+    public ChambreBean() {
+    }
+
+
     public ChambreBean(int IdChambre, String label, int NumChanbre, Boolean etat, Double price, String image) {
         this.IdChambre = IdChambre;
         this.label = label;
         this.NumChanbre = NumChanbre;
         this.etat = etat;
+        this.price = price;
+        this.image = image;
+    }
+    
+    public ChambreBean(String label, int NumChanbre, Boolean etat, Double price, String image) {
+        
+        this.label = label;
+        this.NumChanbre = NumChanbre;
+        this.etat = etat;
+        this.price = price;
+        this.image = image;
+    }
+    
+    public ChambreBean(String label, int NumChanbre,Double price,String image) {
+        
+        this.label = label;
+        this.NumChanbre = NumChanbre;
         this.price = price;
         this.image = image;
     }
