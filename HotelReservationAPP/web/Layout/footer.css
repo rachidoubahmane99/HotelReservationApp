@@ -1,70 +1,93 @@
 
-ul {
-  list-style: none;
-}
-footer {
-    position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 2rem 4rem;
-  background: #1a1a1a;
-  color: #ccc;
-}
-.footer {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  justify-content: center;
-  gap: 2rem;
-}
-.footer_about {
-  /*   background:red; */
-}
-h3 {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.footer_about p {
-  font-size: 0.85rem;
+
+footer{
+  background: #f1f1f1;
+  padding: 90px 0;
 }
 
-.footer_main {
-  /*   background:orange; */
+.footer-container{
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+.logo{
+  width: 180px;
+}
+
+.social-media{
+  margin: 20px 0;
+}
+
+.social-media a{
+  color: #001a21;
+  margin-right: 25px;
+  font-size: 22px;
+  text-decoration: none;
+  transition: .3s linear;
+}
+
+.social-media a:hover{
+  color: #fc5c65;
+}
+
+.right-col h1{
+  font-size: 26px;
+}
+
+.border{
+  width: 100px;
+  height: 4px;
+  background: #fc5c65;
+}
+
+.newsletter-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.txtb{
+  flex: 1;
+  padding: 18px 40px;
+  font-size: 16px;
+  color: #293043;
+  background: #ddd;
+  border: none;
+  font-weight: 700;
+  outline: none;
+  border-radius: 30px;
+  min-width: 260px;
+}
+
+
+
+
+.page-content{
+  min-height: 100vh;
+  font-size: 40px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.footer_main ul {
-  padding-left: 1rem;
-  line-height: 1.5;
-}
-.footer_right {
-  /*   background:blue; */
-}
 
-.footer_right .footer_links {
-  /*   background:gold; */
-  padding: 1.2rem;
-  display: flex;
-  gap: 10px;
-}
-.footer_right .footer_links i {
-  width: 40px;
-  height: 40px;
-  background: gray;
-  border-radius: 50%;
-}
+@media screen and (max-width:960px) {
+  .footer-container{
+    max-width: 600px;
+  }
+  .right-col{
+    width: 100%;
+    margin-bottom: 60px;
+  }
 
-.copyright {
-  margin-top: 2rem;
-  text-align: center;
-  padding: 1rem 0 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-@media screen and (max-width: 700px) {
-  .footer {
-    grid-template-column: 1fr;
+  .left-col{
+    width: 100%;
+    text-align: center;
   }
 }
+

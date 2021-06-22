@@ -19,8 +19,9 @@ String label ;
 int NumChanbre;	
 Boolean etat; 	
 Double price; 	
-    String image;
-
+  private String base64Image;
+ 
+ 
     public ChambreBean() {
     }
 
@@ -31,7 +32,7 @@ Double price;
         this.NumChanbre = NumChanbre;
         this.etat = etat;
         this.price = price;
-        this.image = image;
+        this.base64Image = image;
     }
     
     public ChambreBean(String label, int NumChanbre, Boolean etat, Double price, String image) {
@@ -40,7 +41,7 @@ Double price;
         this.NumChanbre = NumChanbre;
         this.etat = etat;
         this.price = price;
-        this.image = image;
+        this.base64Image = image;
     }
     
     public ChambreBean(String label, int NumChanbre,Double price,String image) {
@@ -48,7 +49,7 @@ Double price;
         this.label = label;
         this.NumChanbre = NumChanbre;
         this.price = price;
-        this.image = image;
+        this.base64Image = image;
     }
 
     public int getIdChambre() {
@@ -72,7 +73,7 @@ Double price;
     }
 
     public String getImage() {
-        return image;
+        return base64Image;
     }
 
     public void setIdChambre(int IdChambre) {
@@ -96,7 +97,7 @@ Double price;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.base64Image = image;
     }
     
     

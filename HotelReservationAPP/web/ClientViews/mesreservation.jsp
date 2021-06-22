@@ -9,12 +9,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Client/mesreservation.css" />
 <title>Mes Reservation</title>
 </head>
-
     <body>
+         
         <div class="container table">
 
   <div class="title">
-
+ <% if (request.getAttribute("DATA")!=null){  %>
+        <div> <h2> <%=request.getAttribute("DATA")%> </h2></div>
+        <% }%>
     <h1>Mes Reservation </h1>
 
   </div>
@@ -46,7 +48,11 @@
             <%} %>
           </div>
           <div class="delete">
-            Anuler
+              <form method="POST" action="<%=request.getContextPath()%>/MesReservation">
+                  <input type="hidden" name="idReservation" value="<%=reservation.getIdReservation()%>">
+                  <button class="delete" type="submit"> Annuler </button>
+              </form>
+            
           </div>
         </td>
       </tr>
@@ -55,7 +61,8 @@
   </table>
 
 </div>
-    
-    </body>
+       <div class="page-content">  </div>
+</body>
 
+<%@ include file="../Includes/footer.jsp" %>
 </html>

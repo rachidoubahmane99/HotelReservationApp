@@ -41,7 +41,8 @@ public class ReservationDaoImp implements ReservationDao{
         ps.setString(6, r.getNote());
         ps.setString(7, r.getPaimentMode());
         long diff = r.getDateFin().getTime() - r.getDateDebut().getTime();
-        double totalPrice =TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)*199;
+        double totalPrice =TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)*r.getTotalPrice();
+        System.out.println(totalPrice);
         ps.setDouble(8,totalPrice);
         ps.executeUpdate();
         System.out.println("requete success");
@@ -71,6 +72,19 @@ public class ReservationDaoImp implements ReservationDao{
     
     con.close();
     return mesreservation;  
+    }
+
+    @Override
+    public boolean AnnulerReservation(ReservationBean r) throws SQLException {
+        String query2 = "DELETE FROM Reservation WHERE idReservation=?";
+	con =Factory.dbConnect();
+        ps = con.prepareStatement(query2);
+        ps.setInt(1, r.getIdReservation());
+        int nbUpdated = ps.executeUpdate();
+
+        con.close();
+        
+        return nbUpdated!=0;  
     }
     
 

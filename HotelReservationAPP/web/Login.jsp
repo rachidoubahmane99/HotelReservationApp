@@ -6,12 +6,11 @@
     Created on : Jun 16, 2021, 2:42:17 PM
     Author     : rachid dev
 --%>
-
-
     <%@ include file="Includes/header.jsp" %>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Login/login.css" />
 
-        <style><%@include file="../Layout/Login/login.css"%></style>
-        <div class="login-page">
+
+    <div class="login-page">
   <div class="form">
           
         <% if (request.getAttribute("DATA")!=null){  %>
@@ -36,19 +35,15 @@
      </FORM>
   </div>
 </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        </div>
+             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
         $('.message a').click(function(){
          $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
         });
     </script>
-    
-    
-        <%@ include file="Includes/footer.jsp" %>
-    </body>
+      <div class="page-content">  </div>
 
-   
-    
 
-</html>
+     <%@ include file="Includes/footer.jsp" %>

@@ -11,9 +11,10 @@
     <body> 
     <center>
         <div class="main">
-    <form action="" method="post" class="trip-form">
+            <form action="" method="post" class="trip-form" action="<%=request.getContextPath()%>/Reservation">
         <input type="hidden" name="idClient" value="<%=client.getIdClient()%>">
-        <input type="text" name="idChambre" value="<%= request.getParameter("chambreId") %>">
+        <input type="hidden" name="price" value="<%=request.getParameter("price")%>">
+        <input type="hidden" name="idChambre" value="<%= request.getParameter("chambreId") %>">
       <fieldset>
         <div class="group-field">
           <label for="from" class="bold-type">Nom Complet : </label>

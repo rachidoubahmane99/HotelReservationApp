@@ -8,9 +8,11 @@
 <html>
 <%@ include file="Includes/Client/headerClient.jsp" %>
 <head>
+    <title>Home</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Client/home.css" />
 </head>
 <body>
+    
       <div class="main">
   <h1>Liste Des Chambres :</h1>
   <ul class="cards">
@@ -18,12 +20,12 @@
   
     <li class="cards_item">
       <div class="card">
-        <div class="card_image"><img src=""></div>
+          <div class="card_image"><img src="data:image/jpg;base64,<%=chambre.getImage()%>" width="200px" height="150px"></div>
         <div class="card_content">
           <h2 class="card_title"><%=chambre.getLabel()%></h2>
           <p class="card_text">Numero Chambre : <%=chambre.getNumChanbre()%></p>
           <p class="card_text"> Prix /Nuit : <%=chambre.getPrice()%> DH</p>
-          <a href="<%=request.getContextPath()%>/Reservation?chambreId=<%=chambre.getIdChambre()%>"><button class="btn card_btn">Reserver</button></a>
+          <a href="<%=request.getContextPath()%>/Reservation?chambreId=<%=chambre.getIdChambre()%>&price=<%=chambre.getPrice()%>"><button class="btn card_btn">Reserver</button></a>
         </div>
       </div>
     </li>

@@ -16,6 +16,15 @@ public class ClientBean {
     String password;
     String FullName; 	String Email;
     String Adresse;
+    String Telephone;
+
+    public String getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(String Telephone) {
+        this.Telephone = Telephone;
+    }
     private byte[] image;
 
     public byte[] getImage() {
