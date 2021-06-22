@@ -34,8 +34,18 @@ public class AdminDaoImp implements AdminDao {
     }
 
     @Override
-    public AdminBean update(AdminBean d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(AdminBean d) throws SQLException{
+        String query = "update Admin set FullName = ?,password = ? WHERE idAdmin=?";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(query);
+        ps.setString(1, d.getFullName());
+        ps.setString(2, d.getPassword());
+        ps.setInt(3, d.getIdAdmin());
+        
+        int nbUpdated = ps.executeUpdate();
+
+        con.close();
+        
     }
 
     @Override

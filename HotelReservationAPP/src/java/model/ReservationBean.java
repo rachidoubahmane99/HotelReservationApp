@@ -21,6 +21,38 @@ public class ReservationBean {
     String Note;
     String PaimentMode;
     Double TotalPrice;
+    int numChambre;
+    boolean annuler;
+
+    public void setAnnuler(boolean annuler) {
+        this.annuler = annuler;
+    }
+    
+    public Boolean getAnnuler() {
+        return annuler;
+    }
+
+    public ReservationBean(int idReservation, Date dateDebut, Date dateFin, int NbrPersonne, String Note, String paimentMode, Double TotalPrice, Boolean valide,Boolean annuler) {
+        this.idReservation = idReservation;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.NbrPersonne = NbrPersonne;
+        this.Note = Note;
+        this.PaimentMode=paimentMode;
+        this.TotalPrice=TotalPrice;
+        this.valide = valide;
+        this.annuler = annuler;
+    }
+
+    public int getNumChambre() {
+        return numChambre;
+    }
+
+    public void setNumChambre(int numChambre) {
+        this.numChambre = numChambre;
+    }
+    
+    
 
     public Double getTotalPrice() {
         return TotalPrice;
@@ -53,6 +85,19 @@ public class ReservationBean {
         this.PaimentMode=paimentMode;
         this.TotalPrice=TotalPrice;
         this.valide = valide;
+    }
+    
+    public ReservationBean(int idReservation, int numChambre, Date dateDebut, Date dateFin, int NbrPersonne, String Note, String paimentMode, Double TotalPrice, Boolean valide,Boolean annuler) {
+        this.idReservation = idReservation;
+        this.numChambre = numChambre;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.NbrPersonne = NbrPersonne;
+        this.Note = Note;
+        this.PaimentMode=paimentMode;
+        this.TotalPrice=TotalPrice;
+        this.valide = valide;
+        this.annuler = annuler;
     }
 
     public int getIdReservation() {

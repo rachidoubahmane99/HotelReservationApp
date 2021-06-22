@@ -5,6 +5,9 @@
  */
 package Dao;
 
+import static Dao.CrudChambreDaoImp.con;
+import static Dao.CrudChambreDaoImp.ps;
+import static Dao.CrudChambreDaoImp.rs;
 import model.ReservationBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import model.ChambreBean;
 import model.ClientBean;
 
 
@@ -51,8 +55,31 @@ public class ReservationDaoImp implements ReservationDao{
     }
 
     @Override
-    public List<ReservationBean> lister() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ReservationBean> lister() throws SQLException{
+        List<ReservationBean> reservations = new ArrayList<ReservationBean>();	
+	
+	String query1 = "select c.NumChanbre,r.idReservation,r.dateDebut,r.dateFin,r.NbrPersonne,r.Note,r.PaimentMode,r.TotalPrice,r.valide,r.annuler from Reservation r, Chambre c where c.idChambre=r.idChambre order by r.idReservation desc";
+	con =Factory.dbConnect();
+        ps = con.prepareStatement(query1);
+        rs = ps.executeQuery();
+        System.out.println("DONE");
+        while(rs.next()){
+            int numReservation = rs.getInt("r.idReservation");
+            int numChambre = rs.getInt("c.NumChanbre");
+            Date dateDebut = rs.getDate("r.dateDebut");
+            Date dateFin = rs.getDate("r.dateFin");
+            int nbrPersonne = rs.getInt("r.NbrPersonne");
+            String note = rs.getString("r.Note");
+            String paimentMode = rs.getString("r.PaimentMode");
+            Double totalPrice = rs.getDouble("r.TotalPrice");
+            Boolean valide = rs.getBoolean("r.valide");
+            Boolean Annuler = rs.getBoolean("r.annuler");
+            ReservationBean res = new ReservationBean(numReservation, numChambre, dateDebut, dateFin, nbrPersonne, note, paimentMode, totalPrice, valide,Annuler);
+            reservations.add(res);
+        }
+        
+        return reservations;
+        
     }
 
     @Override
@@ -76,15 +103,33 @@ public class ReservationDaoImp implements ReservationDao{
 
     @Override
     public boolean AnnulerReservation(ReservationBean r) throws SQLException {
-        String query2 = "DELETE FROM Reservation WHERE idReservation=?";
+        String query2 = "UPDATE Reservation SET annuler = ? WHERE idReservation=?";
 	con =Factory.dbConnect();
         ps = con.prepareStatement(query2);
-        ps.setInt(1, r.getIdReservation());
+        ps.setBoolean(1, true);
+        ps.setInt(2, r.getIdReservation());
         int nbUpdated = ps.executeUpdate();
-
+        
+        System.out.println("Annuler");
         con.close();
         
         return nbUpdated!=0;  
+    }
+
+    @Override
+    public boolean ValiderReservation(ReservationBean r) throws SQLException {
+        String req="UPDATE Reservation SET valide=? WHERE idReservation=?";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(req);
+        ps.setBoolean(1, true);
+        ps.setInt(2,r.getIdReservation());
+        int nbUpdated = ps.executeUpdate();
+        
+        System.out.println("Valiiderrr");
+
+        con.close();
+        
+        return nbUpdated!=0;
     }
     
 

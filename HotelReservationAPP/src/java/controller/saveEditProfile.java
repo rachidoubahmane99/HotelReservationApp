@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Dao.CrudChambreDaoImp;
+import Dao.AdminDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -16,14 +16,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.ChambreBean;
+import model.AdminBean;
 
 /**
  *
  * @author moham
  */
-@WebServlet("/saveEditChambre")
-public class saveEditController extends HttpServlet {
+@WebServlet("/saveEditProfile")
+public class saveEditProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +37,15 @@ public class saveEditController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet saveEditController</title>");            
+            out.println("<title>Servlet saveEditProfile</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet saveEditController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet saveEditProfile at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,6 +60,9 @@ public class saveEditController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    AdminDaoImp db = new AdminDaoImp();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,23 +77,17 @@ public class saveEditController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    CrudChambreDaoImp crudChambreDaoImp = new CrudChambreDaoImp();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            String label = request.getParameter("label");
-            int numero = Integer.parseInt(request.getParameter("numero"));
-            boolean etat = Boolean.parseBoolean(request.getParameter("etat"));
-            double prix = Double.parseDouble(request.getParameter("prix"));
-            String image = request.getParameter("image");
+            String fullname = request.getParameter("fullname");
+            String password = request.getParameter("password");
             
-            ChambreBean ch = new ChambreBean(id,label, numero, etat, prix, image);
+            AdminBean ad = new AdminBean(id,password,fullname);
             
-            crudChambreDaoImp.modifier(ch);
-            response.sendRedirect(request.getContextPath()+"/gestionChambre");
+            db.update(ad);
+            response.sendRedirect(request.getContextPath()+"/profileAd");
         } catch (SQLException ex) {
             Logger.getLogger(saveEditController.class.getName()).log(Level.SEVERE, null, ex);
         }

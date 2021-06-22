@@ -21,6 +21,12 @@ public class AdminBean {
         this.password = password;
         this.FullName = FullName;
     }
+    public AdminBean(int idAdmin, String password, String FullName) {
+        this.idAdmin = idAdmin;
+        this.password = password;
+        this.FullName = FullName;
+    }
+    
     
     public AdminBean(){
         

@@ -5,25 +5,22 @@
  */
 package controller;
 
-import Dao.CrudChambreDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.ChambreBean;
+import javax.servlet.http.HttpSession;
+import model.AdminBean;
 
 /**
  *
  * @author moham
  */
-@WebServlet("/saveEditChambre")
-public class saveEditController extends HttpServlet {
+@WebServlet("/profileAd")
+public class AdminProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +34,15 @@ public class saveEditController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet saveEditController</title>");            
+            out.println("<title>Servlet AdminProfileController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet saveEditController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminProfileController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +60,16 @@ public class saveEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session =request.getSession();
+            
+            AdminBean admin = (AdminBean)session.getAttribute("compteAd");
+           //System.out.println(admin.getFullName());
+            
+                 request.getServletContext().getRequestDispatcher("/profileAdmin.jsp").forward(request, response);
+                 
         processRequest(request, response);
+                 //System.out.println("I'm here");
+                 //response.sendRedirect(request.getContextPath()+"/profileAdmin.jsp");
     }
 
     /**
@@ -74,27 +80,9 @@ public class saveEditController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    CrudChambreDaoImp crudChambreDaoImp = new CrudChambreDaoImp();
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String label = request.getParameter("label");
-            int numero = Integer.parseInt(request.getParameter("numero"));
-            boolean etat = Boolean.parseBoolean(request.getParameter("etat"));
-            double prix = Double.parseDouble(request.getParameter("prix"));
-            String image = request.getParameter("image");
-            
-            ChambreBean ch = new ChambreBean(id,label, numero, etat, prix, image);
-            
-            crudChambreDaoImp.modifier(ch);
-            response.sendRedirect(request.getContextPath()+"/gestionChambre");
-        } catch (SQLException ex) {
-            Logger.getLogger(saveEditController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 

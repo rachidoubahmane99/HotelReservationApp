@@ -1,9 +1,10 @@
 <%-- 
-    Document   : editChambre
-    Created on : Jun 21, 2021, 12:37:02 AM
+    Document   : profileAdmin
+    Created on : Jun 22, 2021, 1:38:05 PM
     Author     : moham
 --%>
-<%@page import="model.ChambreBean"%>
+
+<%@page import="model.AdminBean"%>
 <%@ include file="Includes/Admin/headerAdmin.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Layout/Header.css" />
 
@@ -97,43 +98,30 @@ select{
 </style>
 
 <div>
-    <h3 class="titre">Modifier une chambre</h3> 
+    <h3 class="titre">Editer profile Admin</h3> 
 </div>
 
 
-<% ChambreBean ch = (ChambreBean)session.getAttribute("chambre"); %>
+<% AdminBean ch = (AdminBean)session.getAttribute("compteAd"); %>
 
-<form action="<%=request.getContextPath()%>/saveEditChambre" method="post" >
+<form action="<%=request.getContextPath()%>/saveEditProfile" method="post" >
 <ul class="form-style-1">
     
-    <input type="hidden" name="id" class="field-long" value="<%= ch.getIdChambre() %>"  /> 
+    <input type="hidden" name="id" class="field-long" value="<%= ch.getIdAdmin()%>"  /> 
     <li>
-        <label>Label<span class="required">*</span></label>
-        <input type="text" name="label" class="field-long" value="<%= ch.getLabel() %>" /> 
+        <label>Login<span class="required">*</span></label>
+        <input type="text" name="login" class="field-long" value="<%= ch.getLogin() %>" readonly /> 
     </li>
     <li>
-        <label>Numéro <span class="required">*</span></label>
-        <input type="text" name="numero" class="field-long" value="<%= ch.getNumChanbre() %>" />
+        <label>Full name <span class="required">*</span></label>
+        <input type="text" name="fullname" class="field-long" value="<%= ch.getFullName() %>" />
     </li>
     <li>
-        <label>Etat</label>
-        <select name="etat" class="field-select" value="<%= ch.getEtat() %>">
-        <option value="false">Disponible</option>
-        <option value="true">Occupé</option>
-        </select>
+        <label>Password <span class="required">*</span></label>
+        <input type="text" name="password" class="field-long" />
     </li>
-    <li>
-        <label>Prix <span class="required">*</span></label>
-        <input type="text" name="prix" class="field-long" value="<%= ch.getPrice() %>" />
-    </li>
-    <li>
-        <label>Image <span class="required">*</span></label>
-        <input type="file" name="image" class="field-long" />
-    </li
     <li>
         <input type="submit" value="Modifier" />
     </li>
 </ul>
 </form>
-
-
