@@ -87,8 +87,26 @@ public class ClientDaoImp implements ClientDao{
     }
 
     @Override
-    public ClientBean update(ClientBean c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean update(ClientBean c) throws SQLException{
+
+        String query = "update Client set FullName = ?, Email = ?, Cin = ?, Telephone = ?, Adresse = ? WHERE idClient=?";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(query);
+        ps.setString(1, c.getFullName());
+        ps.setString(2, c.getEmail());
+        ps.setString(3, c.getCin());
+        ps.setString(4, c.getTelephone());
+        ps.setString(5, c.getAdresse());
+        
+        ps.setInt(6, c.getIdClient());
+        
+
+        int nbUpdated = ps.executeUpdate();
+
+        con.close();
+        System.out.println("success Update");
+        return nbUpdated!=0;
+ 
     }
 
     @Override
@@ -116,6 +134,8 @@ public class ClientDaoImp implements ClientDao{
                 cl.setFullName(rs.getString("FullName"));
                 cl.setEmail(rs.getString("Email"));
                 cl.setAdresse(rs.getString("Adresse"));
+                cl.setCin(rs.getString("Cin"));
+                cl.setTelephone(rs.getString("Telephone"));
                             }
          } catch (SQLException ex) {
             System.out.println("Error pendent chercher le client");
@@ -123,6 +143,22 @@ public class ClientDaoImp implements ClientDao{
 
         return cl;
     }   
+
+    @Override
+    public Boolean updatePassword(ClientBean c) throws SQLException {
+        
+    String query = "update Client set password = ? WHERE idClient=?";
+        con =Factory.dbConnect();
+        ps = con.prepareStatement(query);
+        ps.setString(1, c.getPassword());
+        ps.setInt(2, c.getIdClient());
+        
+        int nbUpdated = ps.executeUpdate();
+
+        con.close();
+        
+        return nbUpdated!=0;  
+    }
     
     
     

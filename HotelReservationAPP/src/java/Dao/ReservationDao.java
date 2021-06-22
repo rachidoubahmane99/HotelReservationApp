@@ -18,5 +18,6 @@ public interface ReservationDao {
     public void ajouter (ReservationBean r) throws SQLException;
     public List<ReservationBean> lister();
     public List<ReservationBean> lister(ClientBean cl) throws SQLException;
+    public boolean AnnulerReservation(ReservationBean r) throws SQLException ;
     
 }

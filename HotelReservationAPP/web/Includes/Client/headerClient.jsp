@@ -17,9 +17,9 @@
   </div>
   
   <div class="nav-links">
-    <a href="/Home" target="_blank">Home</a>
-    <a href="/MesReservation" target="_blank">Mes Reservation</a>
-    <a href="#" target="_blank">Mon Profile</a>
-    <a href="<%=request.getContextPath()%>/Logout" target="_blank">Logout</a>
+    <a href="<%=request.getContextPath()%>/home">Home</a>
+    <a href="<%=request.getContextPath()%>/MesReservation" >Mes Reservation</a>
+    <a href="<%=request.getContextPath()%>/profile">Mon Profile</a>
+    <a href="<%=request.getContextPath()%>/Logout">Logout</a>
   </div>
 </div>

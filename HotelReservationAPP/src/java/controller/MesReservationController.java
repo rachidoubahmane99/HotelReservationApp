@@ -30,6 +30,7 @@ public class MesReservationController extends HttpServlet {
     
     
     	ReservationDaoImp db = new ReservationDaoImp();
+        ArrayList<ReservationBean> mesreservation;
 
     public MesReservationController() {
         super();
@@ -65,7 +66,7 @@ public class MesReservationController extends HttpServlet {
         processRequest(request, response);
     
     HttpSession session =request.getSession();
-            ArrayList<ReservationBean> mesreservation;
+            
             
             if (session.getAttribute("loggedIn") == null) {
             request.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
@@ -80,7 +81,7 @@ public class MesReservationController extends HttpServlet {
                 session.setAttribute("mesreservation", mesreservation);
 		
             } catch (SQLException ex) {
-                Logger.getLogger(MesReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
                  request.getServletContext().getRequestDispatcher("/ClientViews/mesreservation.jsp").forward(request, response);
             }
@@ -99,6 +100,29 @@ public class MesReservationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+            ReservationBean r  = new ReservationBean();
+        
+            int idReserString = Integer.parseInt(request.getParameter("idReservation"));
+            r.setIdReservation(idReserString);
+                try {
+                    db.AnnulerReservation(r);
+                     request.setAttribute("DATA", "Reservation  Annulé avec succes ");
+                     HttpSession session =request.getSession();
+                    ClientBean client = (ClientBean)session.getAttribute("compte");
+                    mesreservation = (ArrayList<ReservationBean>) db.lister(client);
+                    session.setAttribute("mesreservation", mesreservation);
+                request.getServletContext().getRequestDispatcher("/ClientViews/mesreservation.jsp").forward(request, response);
+                    System.out.println("successfully Deleted");
+                    
+                } catch (SQLException ex) {
+                   
+                     request.setAttribute("DATA", "Reservation Non  Annulé avec succes ");     
+                request.getServletContext().getRequestDispatcher("/ClientViews/mesreservation.jsp").forward(request, response);
+                    System.out.println(" Not successfully Deleted");
+                }
+           
+    
+    
     }
 
     /**

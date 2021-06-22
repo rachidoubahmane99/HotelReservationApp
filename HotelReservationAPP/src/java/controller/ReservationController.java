@@ -18,8 +18,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.ClientBean;
 import model.ReservationBean;
 
 /**
@@ -30,7 +32,7 @@ import model.ReservationBean;
 public class ReservationController extends HttpServlet {
 
      ReservationDaoImp db = new ReservationDaoImp();
-    
+    ArrayList<ReservationBean> mesreservation;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -100,25 +102,26 @@ try {
             int nbrp = Integer.parseInt(request.getParameter("nbrPersonne"));
         String note = request.getParameter("note");
         String paiement = request.getParameter("paymentMode");
-    
+        double price = Double.parseDouble(request.getParameter("price"));
         ReservationBean r = new ReservationBean();
         r.setIdClient(idClient);
         r.setIdChambre(idChambre);
-        
         r.setDateDebut(datedebut);
         r.setDateFin(datefin);
         r.setNbrPersonne(nbrp);
         r.setNote(note);
         r.setPaimentMode(paiement);
-        
+        r.setTotalPrice(price);
         db.ajouter(r);
-         request.getServletContext().getRequestDispatcher("/MesReservation").forward(request, response);
+         HttpSession session =request.getSession();
+                    ClientBean client = (ClientBean)session.getAttribute("compte");
+                    mesreservation = (ArrayList<ReservationBean>) db.lister(client);
+                    session.setAttribute("mesreservation", mesreservation);
+         request.getServletContext().getRequestDispatcher("/ClientViews/mesreservation.jsp").forward(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
-            request.getServletContext().getRequestDispatcher("/Reservation").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/ClientViews/Reservation.jsp").forward(request, response);
         } catch (SQLException ex) {
-             Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
-             request.getServletContext().getRequestDispatcher("/Reservation").forward(request, response);
+             request.getServletContext().getRequestDispatcher("/ClientViews/Reservation.jsp").forward(request, response);
          }
       
 
