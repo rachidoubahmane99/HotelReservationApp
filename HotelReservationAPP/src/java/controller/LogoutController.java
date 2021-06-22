@@ -7,12 +7,12 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,17 +32,9 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           PrintWriter out=response.getWriter();  
+           
               
-            request.getRequestDispatcher("home.jsp").include(request, response);  
-              
-            HttpSession session=request.getSession();  
-            session.invalidate();
-            response.sendRedirect("Login.jsp");
-              
-            out.print("You are successfully logged out!");  
-              
-            out.close(); 
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,6 +50,15 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+     
+            PrintWriter out=response.getWriter();  
+            HttpSession session=request.getSession();  
+            session.invalidate();
+            response.sendRedirect("Login.jsp");
+              
+            out.print("You are successfully logged out!");  
+              
+            out.close(); 
     
   
     
@@ -75,6 +76,8 @@ public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    
+       
     }
 
     /**

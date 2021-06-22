@@ -43,14 +43,18 @@
           <div class="view">
             <% if(reservation.getValide()) { %>
             Apprové
-            <% }else { %>
+            <% }else if(!reservation.getValide() && !reservation.getAnnuler()) { %>
             En attende 
             <%} %>
           </div>
           <div class="delete">
               <form method="POST" action="<%=request.getContextPath()%>/MesReservation">
                   <input type="hidden" name="idReservation" value="<%=reservation.getIdReservation()%>">
-                  <button class="delete" type="submit"> Annuler </button>
+                  <% if(!reservation.getValide() && !reservation.getAnnuler() ) { %>
+                     <button class="delete" type="submit"> Annuler </button> 
+                  <% }else if(reservation.getAnnuler()) { %>
+                          <div class="delete"> Annulé</div>
+                   <%} %>
               </form>
             
           </div>
@@ -61,7 +65,8 @@
   </table>
 
 </div>
-       <div class="page-content">  </div>
+     <div class="page-content">  </div>
+     <div class="page-content">  </div>
 </body>
 
 <%@ include file="../Includes/footer.jsp" %>

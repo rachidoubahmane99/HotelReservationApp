@@ -93,7 +93,7 @@ public class ReservationDaoImp implements ReservationDao{
     rs = ps.executeQuery();
     System.out.println("requete : select * from Reservation reussit \n");
     while(rs.next()){
-    	ReservationBean res = new ReservationBean(rs.getInt("idReservation"), rs.getInt("idClient"), rs.getInt("idChambre"), rs.getDate("dateDebut"), rs.getDate("dateFin"), rs.getInt("NbrPersonne"), rs.getString("Note"), rs.getString("PaimentMode"), rs.getDouble("TotalPrice") , rs.getBoolean("valide"));
+    	ReservationBean res = new ReservationBean(rs.getInt("idReservation"), rs.getInt("idClient"), rs.getInt("idChambre"), rs.getDate("dateDebut"), rs.getDate("dateFin"), rs.getInt("NbrPersonne"), rs.getString("Note"), rs.getString("PaimentMode"), rs.getDouble("TotalPrice") , rs.getBoolean("valide") ,rs.getBoolean("annuler"));
     	mesreservation.add(res);
     }
     

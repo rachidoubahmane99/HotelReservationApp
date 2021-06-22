@@ -74,7 +74,7 @@ public class ReservationBean {
     public  ReservationBean(){
         
     }
-    public ReservationBean(int idReservation, int idClient, int idChambre, Date dateDebut, Date dateFin, int NbrPersonne, String Note, String paimentMode, Double TotalPrice, Boolean valide) {
+    public ReservationBean(int idReservation, int idClient, int idChambre, Date dateDebut, Date dateFin, int NbrPersonne, String Note, String paimentMode, Double TotalPrice, Boolean valide,Boolean annuler) {
         this.idReservation = idReservation;
         this.idClient = idClient;
         this.idChambre = idChambre;
@@ -85,6 +85,7 @@ public class ReservationBean {
         this.PaimentMode=paimentMode;
         this.TotalPrice=TotalPrice;
         this.valide = valide;
+        this.annuler = annuler;
     }
     
     public ReservationBean(int idReservation, int numChambre, Date dateDebut, Date dateFin, int NbrPersonne, String Note, String paimentMode, Double TotalPrice, Boolean valide,Boolean annuler) {

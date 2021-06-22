@@ -8,9 +8,10 @@
 </head>
 
 <%ClientBean client = (ClientBean)session.getAttribute("compte"); %>
-    <body> 
+<body style="background-color: white"> 
     <center>
         <div class="main">
+            <h2>Completer Votre Reservation</h2>
             <form action="" method="post" class="trip-form" action="<%=request.getContextPath()%>/Reservation">
         <input type="hidden" name="idClient" value="<%=client.getIdClient()%>">
         <input type="hidden" name="price" value="<%=request.getParameter("price")%>">

@@ -17,7 +17,7 @@ img {
 }
 
 .btn {
-  color: #ffffff;
+  color:  white;
   padding: 0.8rem;
   font-size: 14px;
   text-transform: uppercase;
@@ -27,7 +27,7 @@ img {
   width: 100%;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+  background: #049d9d;
 }
 
 .btn:hover {
@@ -40,6 +40,7 @@ img {
   list-style: none;
   margin: 0;
   padding: 0;
+ 
 }
 
 .cards_item {
@@ -55,7 +56,7 @@ img {
 
 @media (min-width: 56rem) {
   .cards_item {
-    width: 33.3333%;
+    width: 25%;
   }
 }
 
@@ -70,7 +71,7 @@ img {
 
 .card_content {
   padding: 1rem;
-  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+  background: linear-gradient(to bottom left, #3E5151 40%, #DECBA4 100%);
 }
 
 .card_title {
