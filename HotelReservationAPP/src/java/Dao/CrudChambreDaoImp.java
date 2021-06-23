@@ -131,7 +131,30 @@ public class CrudChambreDaoImp implements CrudChambreDAO{
         ps.setInt(1, id);
         rs = ps.executeQuery();
         while(rs.next()){
-            chambre = new ChambreBean(rs.getInt("idChambre"), rs.getString("label"), rs.getInt("NumChanbre"), rs.getBoolean("etat"), rs.getDouble("price"), rs.getString("image"));
+            Blob blob = rs.getBlob("image");
+            InputStream inputStream = blob.getBinaryStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+            try {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            } catch (IOException ex) {
+                Logger.getLogger(CrudChambreDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            byte[] imageBytes = outputStream.toByteArray();
+
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+            try {
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CrudChambreDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            chambre = new ChambreBean(rs.getInt("idChambre"), rs.getString("label"), rs.getInt("NumChanbre"), rs.getBoolean("etat"), rs.getDouble("price"), base64Image);
         }
 
         con.close();

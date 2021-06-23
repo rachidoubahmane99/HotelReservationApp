@@ -29,6 +29,7 @@
         <th>Numero</th>
         <th>Etat</th>
         <th>Prix</th>
+        <th>Image</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -42,6 +43,7 @@
         <td>Occupé</td>
         <% } %>
         <td><%= chambre.getPrice() %></td>
+        <td><img style="width: 80px;" src="data:image/jpg;base64,<%=chambre.getImage()%>" ></td>
         <td><button  type="button" class="btn btn-secondary"><a style="text-decoration: none;color: white;" href="<%=request.getContextPath()%>/EditChambre?id=<%= chambre.getIdChambre() %>">Edit</a></button> &nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-danger"><a style="text-decoration: none;color:white;" href="<%=request.getContextPath()%>/deleteChambre?id=<%= chambre.getIdChambre() %>" />Delete</a></button></td>
         
     </tr>
@@ -49,3 +51,5 @@
 </table>
             </div>
 </div>
+
+<%@ include file="Includes/footer.jsp" %>

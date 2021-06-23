@@ -58,7 +58,7 @@
         <%  } %>
         
         
-        <% if(!reservation.getAnnuler()){ %>
+        <% if(!reservation.getAnnuler() && !reservation.getValide()){ %>
         <td><button type="button" class="btn btn-primary"><a style="text-decoration: none; color:white;" href="<%=request.getContextPath()%>/validerReservation?id=<%= reservation.getIdReservation()%>">Approver</a></button></td>
         
         <td><button type="button" class="btn btn-danger"><a style="text-decoration: none; color:white;" href="<%=request.getContextPath()%>/rejeterReservation?id=<%= reservation.getIdReservation() %>">Rejeter</a></button></td>
@@ -68,3 +68,5 @@
 </table>
             </div>
 </div>
+
+<%@ include file="Includes/footer.jsp" %>

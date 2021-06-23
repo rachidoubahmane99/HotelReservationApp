@@ -30,7 +30,7 @@
     <a href="<%=request.getContextPath()%>/gestionReservations">Gestion Reservation</a>
     <a href="<%=request.getContextPath()%>/gestionChambre">Gestion Chambres</a>
     <a href="<%=request.getContextPath()%>/profileAd">Mon Profile</a>
-    <a href="<%=request.getContextPath()%>/Logout" target="_blank">Logout</a>
+    <a href="<%=request.getContextPath()%>/LogoutAdmin">Logout</a>
   </div>
 </div>
 </body>

@@ -6,22 +6,29 @@
 package controller;
 
 import Dao.CrudChambreDaoImp;
+import Dao.Factory;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.ChambreBean;
 
 /**
  *
  * @author moham
  */
+@MultipartConfig
 @WebServlet("/saveEditChambre")
 public class saveEditController extends HttpServlet {
 
@@ -63,7 +70,42 @@ public class saveEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+            System.out.println("hi");
+            String label = request.getParameter("label");
+            System.out.println("labeel "+label);
+            int id = Integer.parseInt(request.getParameter("id"));
+            System.out.println(id);
+            
+            int numero = Integer.parseInt(request.getParameter("numero"));
+            boolean etat = Boolean.parseBoolean(request.getParameter("etat"));
+            double prix = Double.parseDouble(request.getParameter("prix"));
+            
+            //String image = request.getParameter("image");
+            Part part = request.getPart("image");
+        try {
+            Connection con = Factory.dbConnect();
+            PreparedStatement ps = con.prepareStatement("update Chambre set label = ?, NumChanbre = ?, etat = ?, price = ?, image = ? WHERE idChambre=?");
+            int result = 0;
+            ps.setString(1, label);
+            ps.setInt(2, numero);
+            ps.setBoolean(3, etat);
+            ps.setDouble(4, prix);
+            InputStream is = part.getInputStream();
+            ps.setBlob(5, is);
+            ps.setInt(6, id);
+            
+            result = ps.executeUpdate();
+                if (result > 0) {
+                    System.out.println("gooood");
+                } else {
+                    System.out.println("nooot goood");
+                }
+                
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(saveEditController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -78,22 +120,8 @@ public class saveEditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String label = request.getParameter("label");
-            int numero = Integer.parseInt(request.getParameter("numero"));
-            boolean etat = Boolean.parseBoolean(request.getParameter("etat"));
-            double prix = Double.parseDouble(request.getParameter("prix"));
-            String image = request.getParameter("image");
-            
-            ChambreBean ch = new ChambreBean(id,label, numero, etat, prix, image);
-            
-            crudChambreDaoImp.modifier(ch);
+        doGet(request, response);
             response.sendRedirect(request.getContextPath()+"/gestionChambre");
-        } catch (SQLException ex) {
-            Logger.getLogger(saveEditController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         processRequest(request, response);
     }
