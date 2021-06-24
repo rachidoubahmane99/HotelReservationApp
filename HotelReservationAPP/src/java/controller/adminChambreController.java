@@ -68,10 +68,10 @@ public class adminChambreController extends HttpServlet {
             ArrayList<ChambreBean> chambres;
             
             if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
              if(session.getAttribute("loggedIn") !="Admin") {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
             else {
             try {
@@ -83,7 +83,7 @@ public class adminChambreController extends HttpServlet {
 		e.printStackTrace();
             }
 		
-		request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
+		request.getServletContext().getRequestDispatcher("/adminViews/gestionChambre.jsp").forward(request, response);
                 //request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
             }
     }

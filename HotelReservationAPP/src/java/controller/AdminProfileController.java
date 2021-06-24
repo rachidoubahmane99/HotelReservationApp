@@ -63,17 +63,17 @@ public class AdminProfileController extends HttpServlet {
         HttpSession session =request.getSession();
         
         if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
              if(session.getAttribute("loggedIn") !="Admin") {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
             else {
             
             AdminBean admin = (AdminBean)session.getAttribute("compteAd");
            //System.out.println(admin.getFullName());
             request.setAttribute("success", "Profile modifier avec success");
-                 request.getServletContext().getRequestDispatcher("/profileAdmin.jsp").forward(request, response);
+                 request.getServletContext().getRequestDispatcher("/adminViews/profileAdmin.jsp").forward(request, response);
                  
         processRequest(request, response);
                  //System.out.println("I'm here");

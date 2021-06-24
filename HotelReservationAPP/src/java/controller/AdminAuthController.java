@@ -29,7 +29,7 @@ public class AdminAuthController extends HttpServlet {
     protected void doGet(HttpServletRequest request,
    HttpServletResponse response) throws ServletException, IOException {
   processRequest(request, response);
- RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/LoginAdmin.jsp");
+ RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp");
         rd.forward(request, response);
  }
  protected void doPost(HttpServletRequest request,
@@ -44,8 +44,8 @@ public class AdminAuthController extends HttpServlet {
         AdminBean a = new AdminBean(email, password);
         ad =  db.VerifierAdmin(a);
         if (ad== null) {
-            request.setAttribute("DATA", "info Incorrects");
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/LoginAdmin.jsp");
+            request.setAttribute("DATA", "Login ou Password Incorrect!! ");
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp");
         rd.forward(request, response);
         }
         
@@ -54,7 +54,7 @@ public class AdminAuthController extends HttpServlet {
              HttpSession session =request.getSession();
             session.setAttribute("loggedIn", "Admin");
             session.setAttribute("compteAd", compteAd);
-            response.sendRedirect("homeAdmin.jsp");
+            response.sendRedirect("adminViews/homeAdmin.jsp");
             System.out.println("successfully login");
              
        

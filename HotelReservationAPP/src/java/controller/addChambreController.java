@@ -130,7 +130,7 @@ public class addChambreController extends HttpServlet {
         
        
         
-            request.getServletContext().getRequestDispatcher("/addChambre.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/addChambre.jsp").forward(request, response);
         processRequest(request, response);
     }
 

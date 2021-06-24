@@ -84,7 +84,7 @@ public class ChambreController extends HttpServlet {
 		e.printStackTrace();
             }
 		
-		request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+		request.getServletContext().getRequestDispatcher("/adminViews/homeAdmin.jsp").forward(request, response);
 
                 //request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
 

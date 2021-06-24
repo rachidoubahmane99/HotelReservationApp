@@ -12,7 +12,7 @@
     <head>
         <title>Admin Login</title>
     </head>
-    <%@ include file="Includes/header.jsp" %>
+    <%@ include file="../Includes/header.jsp" %>
     <body>
        
         <style><%@include file="../Layout/Login/login.css"%></style>
@@ -33,7 +33,7 @@
 </div>
     </body>
 
-        <%@ include file="Includes/footer.jsp" %>
+        <%@ include file="../Includes/footer.jsp" %>
 
 
 </html>

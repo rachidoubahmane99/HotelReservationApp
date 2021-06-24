@@ -66,10 +66,10 @@ public class adminReservationController extends HttpServlet {
             ArrayList<ReservationBean> reservations;
             
             if (session.getAttribute("loggedIn") == null) {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
              if(session.getAttribute("loggedIn") !="Admin") {
-            request.getServletContext().getRequestDispatcher("/LoginAdmin.jsp").forward(request, response);
+            request.getServletContext().getRequestDispatcher("/adminViews/LoginAdmin.jsp").forward(request, response);
             }
             else {
             try {
@@ -81,7 +81,7 @@ public class adminReservationController extends HttpServlet {
 		e.printStackTrace();
             }
 		
-		request.getServletContext().getRequestDispatcher("/gestionReservations.jsp").forward(request, response);
+		request.getServletContext().getRequestDispatcher("/adminViews/gestionReservations.jsp").forward(request, response);
                 //request.getServletContext().getRequestDispatcher("/gestionChambre.jsp").forward(request, response);
             }
         

@@ -63,7 +63,7 @@ public class LogoutAdminController extends HttpServlet {
         PrintWriter out=response.getWriter();  
             HttpSession session=request.getSession();  
             session.invalidate();
-            response.sendRedirect("LoginAdmin.jsp");
+            response.sendRedirect("adminViews/LoginAdmin.jsp");
               
             out.print("You are successfully logged out!");  
               

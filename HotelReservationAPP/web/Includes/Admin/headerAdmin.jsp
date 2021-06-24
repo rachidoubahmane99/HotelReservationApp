@@ -25,8 +25,8 @@
     </label>
   </div>
   
-  <div class="nav-links"
-    <a href="homeAdmin.jsp">Home</a>
+  <div class="nav-links">
+    <a href="./adminViews/homeAdmin.jsp">Home</a>
     <a href="<%=request.getContextPath()%>/gestionReservations">Gestion Reservation</a>
     <a href="<%=request.getContextPath()%>/gestionChambre">Gestion Chambres</a>
     <a href="<%=request.getContextPath()%>/profileAd">Mon Profile</a>

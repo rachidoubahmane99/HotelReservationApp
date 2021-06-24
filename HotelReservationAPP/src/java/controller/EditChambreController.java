@@ -72,7 +72,7 @@ public class EditChambreController extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(EditChambreController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getServletContext().getRequestDispatcher("/editChambre.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher("/adminViews/editChambre.jsp").forward(request, response);
         processRequest(request, response);
     }
 
