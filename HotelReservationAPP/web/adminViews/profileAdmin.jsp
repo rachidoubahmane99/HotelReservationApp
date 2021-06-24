@@ -37,14 +37,14 @@
             </li>
             <li>
                 <label>Password <span class="required">*</span></label>
-                <input type="text" name="password" class="field-long" />
+                <input type="password" name="password" class="field-long" />
             </li>
             <li>
                 <input type="submit" value="Modifier" />
             </li>
         </ul>
         </form>
-
+<div class="page-content">  </div>
             <%@ include file="../Includes/footer.jsp" %>
 
     </body>

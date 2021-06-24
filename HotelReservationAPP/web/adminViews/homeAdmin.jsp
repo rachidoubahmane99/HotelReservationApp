@@ -8,7 +8,6 @@
     <body>
         <%@ include file="../Includes/Admin/headerAdmin.jsp" %>
 
-
         <%@ include file="../Includes/footer.jsp" %>
     </body>
 </html>

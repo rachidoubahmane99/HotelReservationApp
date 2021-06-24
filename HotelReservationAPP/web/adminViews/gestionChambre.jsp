@@ -59,7 +59,7 @@
         </table>
                     </div>
         </div>
-
+<div class="page-content">  </div>
         <%@ include file="../Includes/footer.jsp" %>
         
         

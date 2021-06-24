@@ -57,8 +57,9 @@
     </ul>
     </form>
 
-
+<div class="page-content">  </div>
     <%@ include file="../Includes/footer.jsp" %>
+    
 
     </body>
 </html>
