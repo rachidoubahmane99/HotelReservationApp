@@ -42,6 +42,9 @@
             <li>
                 <input type="submit" value="Modifier" />
             </li>
+            <li>
+                <input type="reset" value="Cancel" />
+            </li>
         </ul>
         </form>
 <div class="page-content">  </div>
