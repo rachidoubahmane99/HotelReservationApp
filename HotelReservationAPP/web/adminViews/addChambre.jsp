@@ -26,6 +26,10 @@
                 <input type="text" name="prix" class="field-long" />
             </li>
             <li>
+                <label>Nombre de personne <span class="required">*</span></label>
+                <input type="text" name="nbPersonne" class="field-long" />
+            </li>
+            <li>
                 <label>Image <span class="required">*</span></label>
                 <input type="file" name="image" class="field-long" />
             </li>
