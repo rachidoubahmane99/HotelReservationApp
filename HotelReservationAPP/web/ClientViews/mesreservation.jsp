@@ -17,7 +17,7 @@
  <% if (request.getAttribute("DATA")!=null){  %>
         <div> <h2> <%=request.getAttribute("DATA")%> </h2></div>
         <% }%>
-    <h1>Mes Reservation </h1>
+    <h1>Liste de mes Reservation </h1>
 
   </div>
   <table>
